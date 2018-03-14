@@ -11,7 +11,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title align-title="center">Welkomto Chat {{user.username}}!</ion-title>
+    <ion-title align-title="center">Welkom {{user.username}}!</ion-title>
     <ion-buttons end>
       <button ion-button (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
@@ -19,12 +19,16 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content class="home">
   <!--<div class="chat-container">-->
     <div class="chat">
       <div class="message" *ngFor="let currentmessage of message">
-        {{currentmessage.message}}
-      </div>
+
+        <!--{{currentmessage.message}}-->
+        <div class="messageContains" *ngIf="currentmessage.message.includes('BartKandoe')">{{currentmessage.message}}</div>
+        <div class="notUserContains" *ngIf="!currentmessage.message.includes('BartKandoe')">{{currentmessage.message}}</div>
+        </div>
+
     </div>
   <!--</div>-->
 </ion-content>
@@ -41,8 +45,8 @@
 </div>-->
 <ion-footer>
   <div class="send-button">
-    <input placeholder="Bericht"  id="input" type="text" #input (keyup.enter)="sendMessage(input.value)">
-    <button class="send" outline ion-button icon-only (click)="sendMessage(input.value)"><ion-icon name="send"></ion-icon></button>
+    <input placeholder="  Typ hier je Bericht..."  id="input" type="text" #input (keyup.enter)="sendMessage(input.value)">
+    <button class="send" clear ion-button icon-only (click)="sendMessage(input.value)"><ion-icon name="send"></ion-icon></button>
   </div>
 </ion-footer>
 <!--<div class="footer">

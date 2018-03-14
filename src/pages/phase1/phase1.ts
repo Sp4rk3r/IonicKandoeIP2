@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {Session} from "../../model/session";
 import {SessionsProvider} from "../../providers/sessions/sessions";
 import {UseridStorage} from "../../sessionStorage/userid-storage";
 import {CardserviceProvider} from "../../providers/cardservice/cardservice";
 import {MenuPage} from "../menu/menu";
+import {ChatPage} from "../chat/chat";
+import {CreateCardPage} from "../create-card/create-card";
 
 /**
  * Generated class for the Phase1Page page.
@@ -29,11 +31,13 @@ export class Phase1Page {
 
   public barValue: 40;
   public turn = true;
+  public sessionIdParam;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private sessionService: SessionsProvider,
               private userIdStorage: UseridStorage,
-              private cardService: CardserviceProvider) {
+              private cardService: CardserviceProvider,
+              private popoverCtrl: PopoverController) {
     this.userId = this.userIdStorage.getUserId();
     this.sessionId = this.navParams.get("sessionId");
     this.sessionService.getSession(this.sessionId,this.userId).subscribe(
@@ -90,7 +94,32 @@ export class Phase1Page {
   }
 
   Increment() {
+    //nadat beurt voorbij is wordt button gedisabled
+    //barvalue moet waarde krijgen vanuit db en indien gedrukt optellen en doorsturen ner db
     this.barValue++;
     this.turn=false;
+  }
+
+  openMondal(sessionId: number) {
+    /*let popover = this.popoverCtrl.create(ChatPage, {}, {cssClass: 'chat-popover'});
+    popover.present({ev});
+    let ev = {
+      target : {
+        getBoundingClientRect : () => {
+          return {
+            top: '60',
+            left: '5'
+          };
+        }
+      }
+    };*/
+    this.navCtrl.push(ChatPage, {
+      sessionIdParam : sessionId,
+    });
+  }
+
+  createCard() {
+      let popover = this.popoverCtrl.create(CreateCardPage);
+      popover.present();
   }
 }

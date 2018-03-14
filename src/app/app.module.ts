@@ -37,6 +37,8 @@ import {Phase1PageModule} from "../pages/phase1/phase1.module";
 import {Phase2Page} from "../pages/phase2/phase2";
 import {Phase2PageModule} from "../pages/phase2/phase2.module";
 import { CardserviceProvider } from '../providers/cardservice/cardservice';
+import {CreateCardPage} from "../pages/create-card/create-card";
+import {CreateCardPageModule} from "../pages/create-card/create-card.module";
 
 /*export function authHttpServiceFactory(http) {
   return new AuthHttp(new AuthConfig({
@@ -67,6 +69,7 @@ import { CardserviceProvider } from '../providers/cardservice/cardservice';
     ActiveSessionPageModule,
     Phase1PageModule,
     Phase2PageModule,
+    CreateCardPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -81,6 +84,7 @@ import { CardserviceProvider } from '../providers/cardservice/cardservice';
     ActiveSessionPage,
     Phase1Page,
     Phase2Page,
+    CreateCardPage,
   ],
   providers: [
     TokenStorage,

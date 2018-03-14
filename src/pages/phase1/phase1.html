@@ -63,6 +63,16 @@
     </ion-row>
   </ion-card>
 
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="openMondal(session.id)"><ion-icon name="ios-chatbubbles"></ion-icon></button>
+    <!--Moet nog aangepast worden aan de sessie.-->
+  </ion-fab>
+
+  <ion-fab left bottom>
+    <button ion-fab color="light" (click)="createCard()"><ion-icon name="md-add-circle"></ion-icon></button>
+    <!--Moet nog aangepast worden aan de sessie.-->
+  </ion-fab>
+
 </ion-content>
 
 <ion-footer color="dark">

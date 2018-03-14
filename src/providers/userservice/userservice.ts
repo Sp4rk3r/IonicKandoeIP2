@@ -37,7 +37,7 @@ export class UserserviceProvider {
   }
 */
   getUser(userId: number): Observable<any> {
-    return this.http.get('https://kandoe-backend.herokuapp.com/user/' + userId);
+    return this.http.get('https://kandoe-backend.herokuapp.com/users/' + userId);
   }
 
 

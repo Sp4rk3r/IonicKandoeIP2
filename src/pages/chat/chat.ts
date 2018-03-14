@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicPage} from 'ionic-angular';
+import {IonicPage, NavParams} from 'ionic-angular';
 import * as $ from 'jquery';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs'
@@ -26,10 +26,14 @@ export class ChatPage {
   public user = [];
   public username: string;
   public message = [new Message('')];
+  public sessionId;
+  private stringBody: string;
+//  public stringBody;
 
   constructor(private userservice: UserserviceProvider,
               private useridStorage: UseridStorage,
-              private messageService: MessageServiceProvider) {
+              private messageService: MessageServiceProvider,
+              public navParams: NavParams) {
     this.userservice.getUser(this.useridStorage.getUserId()).subscribe(
       data => {
         this.user = data;
@@ -38,25 +42,41 @@ export class ChatPage {
         //this.userarray = data.toString();
       }
     );
+    this.messageService.getMessages(this.sessionId,this.useridStorage.getUserId()).subscribe(
+      data => {
+        this.message = data;
+      }
+    );
     this.username = useridStorage.getUsername();
-
+    this.sessionId = this.navParams.get("sessionIdParam");
+    //alert(this.sessionId)
     //this.username = this.user.username;
   }
 
   ngOnInit() {
-    this.initializeWebSocketConnection();
+    this.initializeWebSocketConnection(this.sessionId, this.username);
+    this.messageService.getMessages(this.sessionId,this.useridStorage.getUserId()).subscribe(
+      data => {
+        this.message = data;
+      }
+    );
   }
 
 
-  private initializeWebSocketConnection() {
+  private initializeWebSocketConnection(sessionId: number, username: string) {
     let ws = new SockJS(this.serverUrl);
+    this.stringBody= "";
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/chat/2", (message) => {
+      //alert(sessionId);
+      that.stompClient.subscribe("/chat/" + sessionId , (message) => {
         if (message.body) {
-          $(".chat").append("<div class='\message\'>"+message.body+"</div>");
+          $(".chat").append("<div class='\messageContains\'>"+message.body+"</div>");
           console.log(message.body);
+          //alert(username)
+        }else {
+          $(".chat").append("<div class='\notUserContains\'>"+message.body+330+"</div>");
         }
       })
     })
@@ -65,7 +85,7 @@ export class ChatPage {
   sendMessage(message){
     let usernameMessage = this.useridStorage.getUsername() +': ' +  message ;
     let dbMessage = new Message( usernameMessage);
-    this.messageService.sendMessage(dbMessage, 2, this.useridStorage.getUserId()).subscribe(data => { // ipv 2 naar sessionId
+    this.messageService.sendMessage(dbMessage, this.sessionId, this.useridStorage.getUserId()).subscribe(data => { // ipv 2 naar sessionId
         console.log("message successfully send to database");
       },
       error => {
@@ -73,7 +93,7 @@ export class ChatPage {
         console.log(error);
         //alert("Error sending message");
       });
-    this.stompClient.send('/app/send/message/2' , {}, usernameMessage); // ipv 2 -> sessionId
+    this.stompClient.send('/app/send/message/' + this.sessionId , {}, usernameMessage); // ipv 2 -> sessionId
     $('#input').val('');
   }
 }
