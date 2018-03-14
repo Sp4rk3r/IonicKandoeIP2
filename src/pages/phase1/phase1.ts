@@ -27,6 +27,8 @@ export class Phase1Page {
   public selectedCards = [];
   public buttonStates = [];
 
+  public barValue: 40;
+  public turn = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private sessionService: SessionsProvider,
@@ -53,6 +55,7 @@ export class Phase1Page {
         )
       }
     );
+    this.barValue = 40;
   }
 
   ionViewDidLoad() {
@@ -84,5 +87,10 @@ export class Phase1Page {
         this.navCtrl.setRoot(MenuPage);
       }
     )
+  }
+
+  Increment() {
+    this.barValue++;
+    this.turn=false;
   }
 }

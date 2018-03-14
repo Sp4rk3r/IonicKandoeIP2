@@ -42,6 +42,27 @@
   </div>
   <br>
   <button ion-button full color="primary" (click)="saveCardsIds()">Klaar</button>
+  <ion-card>
+    <progress max="100" value="{{barValue}}" class="node-js" style="color: red;">
+      <!-- Browsers that support HTML5 progress element will ignore the html inside `progress` element. Whereas older browsers will ignore the `progress` element and instead render the html inside it. -->
+      <!--<div class="progress-bar">
+        <span style="width: '{{barValue}}'%">35%</span>
+      </div>-->
+    </progress>
+    <ion-card-content>
+      <ion-title>Dit is de naam van de kaart</ion-title>
+      <div class="descriptionContainer">dit is de description van de kaart, je ziet dat de kaart al zoveel keer is geliked</div>
+      </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button [disabled]="!turn" ion-button icon-left clear small (click)="Increment()">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{barValue}} likes</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
 </ion-content>
 
 <ion-footer color="dark">
