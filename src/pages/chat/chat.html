@@ -25,8 +25,8 @@
       <div class="message" *ngFor="let currentmessage of message">
 
         <!--{{currentmessage.message}}-->
-        <div class="messageContains" *ngIf="currentmessage.message.includes('BartKandoe')">{{currentmessage.message}}</div>
-        <div class="notUserContains" *ngIf="!currentmessage.message.includes('BartKandoe')">{{currentmessage.message}}</div>
+        <div class="messageContains" *ngIf="currentmessage.message.includes(username)">{{currentmessage.message}}</div>
+        <div class="notUserContains" *ngIf="!currentmessage.message.includes(username)">{{currentmessage.message}}</div>
         </div>
 
     </div>

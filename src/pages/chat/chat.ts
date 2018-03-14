@@ -28,6 +28,7 @@ export class ChatPage {
   public message = [new Message('')];
   public sessionId;
   private stringBody: string;
+  private stringDiv: string;
 //  public stringBody;
 
   constructor(private userservice: UserserviceProvider,
@@ -66,18 +67,30 @@ export class ChatPage {
   private initializeWebSocketConnection(sessionId: number, username: string) {
     let ws = new SockJS(this.serverUrl);
     this.stringBody= "";
+    this.stringDiv = "";
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
       //alert(sessionId);
       that.stompClient.subscribe("/chat/" + sessionId , (message) => {
+        //alert(message.contains(username));
         if (message.body) {
-          $(".chat").append("<div class='\messageContains\'>"+message.body+"</div>");
+          this.stringBody = message.body;
+          //alert(this.stringBody);
+          if (this.stringBody.includes(username)){
+            //alert("bevat: " + username);
+            this.stringDiv = "<div class='\messageContains\'>"+message.body+"</div>";
+          }
+          else if (!this.stringBody.includes(username)) {
+            this.stringDiv = "<div class='\notUserContains\'>"+message.body+330+"</div>"
+          }
+          //alert(this.stringDiv);
+          $(".chat").append(this.stringDiv);
           console.log(message.body);
           //alert(username)
-        }else {
+        }/*else {
           $(".chat").append("<div class='\notUserContains\'>"+message.body+330+"</div>");
-        }
+        }*/
       })
     })
   }
