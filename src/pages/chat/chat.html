@@ -1,0 +1,58 @@
+<!--
+  Generated template for the ChatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark" [hideBackButton]="false">
+    <ion-buttons align-self-start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title align-title="center">Welkomto Chat {{user.username}}!</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!--<div class="chat-container">-->
+    <div class="chat">
+      <div class="message" *ngFor="let currentmessage of message">
+        {{currentmessage.message}}
+      </div>
+    </div>
+  <!--</div>-->
+</ion-content>
+<!--<div width="100%">
+<div style="text-align:center">
+  <h1>
+    Welcome to Chat, {{user.username}}
+  </h1>
+  <div class="chat-container">
+    <div class="chat">
+      <div class="message"></div>
+    </div>
+  </div>
+</div>-->
+<ion-footer>
+  <div class="send-button">
+    <input placeholder="Bericht"  id="input" type="text" #input (keyup.enter)="sendMessage(input.value)">
+    <button class="send" outline ion-button icon-only (click)="sendMessage(input.value)"><ion-icon name="send"></ion-icon></button>
+  </div>
+</ion-footer>
+<!--<div class="footer">
+  <div class="send-button">
+
+    <input  id="input" type="text" #input>
+    <button ion-button icon-only (click)="sendMessage(input.value)"><ion-icon name="send"></ion-icon></button>
+  </div>
+
+</div>-->
+
+
+

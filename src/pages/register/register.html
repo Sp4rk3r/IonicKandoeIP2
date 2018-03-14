@@ -1,0 +1,64 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-buttons align-self-start="">
+      <button ion-button (click)="goBackToLogin()" block clear>
+        <ion-icon name="arrow-dropleft-circle"></ion-icon>
+        &nbsp;&nbsp;Back
+      </button>
+    </ion-buttons>
+    <ion-title align="center">Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="login-content" padding>
+  <div class="login-box">
+
+    <form (ngSubmit)="register2()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="model.email" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="model.password" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Confirm Password" name="pwCheck" [(ngModel)]="passwordCheck" required ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Firstname" name="firstname" [(ngModel)]="model.firstname" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Lastname" name="lastname" [(ngModel)]="model.lastname" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="model.username" required></ion-input>
+            </ion-item>
+
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid || model.password !== passwordCheck" (click)="register2()">Register</button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </div>
+</ion-content>

@@ -1,4 +1,5 @@
-page-home {
+page-session-done {
+
   .home {
     background: rgba(2, 1, 2, 0.28);
   }
@@ -32,32 +33,4 @@ page-home {
     text-align: center;
   }
 
-  #chat-popover {
-    top: 70px;
-    left: 5%;
-    height: 80%;
-    width: 90%;
-  }
-
-  .sessionEnd {
-    filter: grayscale(100%);
-  }
-
-  .popover.content .popover.md {
-    top: 70px;
-    left: 5%;
-    height: 80%;
-    width: 90%;
-  }
-
-  .chat-popover .popover.content {
-    top: 70px;
-    left: 5%;
-    height: 80%;
-    width: 90%;
-  }
-
-
 }
-
-

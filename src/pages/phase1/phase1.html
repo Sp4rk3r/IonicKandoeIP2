@@ -1,0 +1,51 @@
+<!--
+  Generated template for the ActiveSessionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark" [hideBackButton]="false">
+    <ion-buttons align-self-start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title align-title="center">{{session.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="home" padding>
+  <ion-title>Selecteer kaarten</ion-title>
+  <div *ngFor="let card of cards; let i = index">
+    <ion-card>
+      <img src="assets/imgs/Kandoe.jpg">
+      <ion-card-content>
+        <ion-title>{{card.name}}</ion-title>
+        <div class="descriptionContainer">{{card.description}}</div>
+        <button ion-button full color="secondary" *ngIf="!buttonStates[i]" (click)="selectCard(card, i)" [disabled]="selectedCards.length === session.maxCards">
+          <ion-icon name="thumbs-up"></ion-icon>
+          &nbsp; Selecteer
+        </button>
+        <button ion-button full color="danger" *ngIf="buttonStates[i]" (click)="deselectCard(card, i)">
+          <ion-icon name="thumbs-down"></ion-icon>
+          &nbsp; Verwijder
+        </button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <br>
+  <button ion-button full color="primary" (click)="saveCardsIds()">Klaar</button>
+</ion-content>
+
+<ion-footer color="dark">
+  <ion-navbar color="dark">
+    <ion-title>{{selectedCards.length}} van de {{session.maxCards}} kaarten geselecteerd</ion-title>
+  </ion-navbar>
+</ion-footer>
