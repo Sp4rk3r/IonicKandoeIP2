@@ -20,7 +20,7 @@ import {MenuPage} from "../menu/menu";
 export class RegisterPage {
   createSuccess = false;
   registerCredentials = { email: '', password: '', firstname: '', lastname: '', username: '' };
-  model = new User(0,'', '', '', '', '', '' );
+  model = new User(0,'', '', '', '', '');
 
   constructor(public nav: NavController,  private auth: AuthServiceProvider, private alertCtrl: AlertController) {
   }

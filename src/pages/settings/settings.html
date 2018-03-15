@@ -21,11 +21,61 @@
 </ion-header>
 
 
-<ion-content padding>
-  This page is the settings page
-  Set username, email adres, notification, afbeelding, ...
+<ion-content padding class="home">
+  <ion-card>
+    <ion-card-header>Profiel</ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="ProfileForm()">
+        <ion-item>
+          <ion-label color="primary" stacked><ion-icon name="md-contact"></ion-icon>&nbsp; Username</ion-label>
+          <ion-input type="text" [(ngModel)]="user.username" name="username" placeholder="{{user.username}}" clearInput required></ion-input>
+        </ion-item>
 
-  <form (ngSubmit)="logForm()">
+        <ion-item>
+          <ion-label color="primary" stacked><ion-icon name="md-person"></ion-icon>&nbsp;Firstname</ion-label>
+          <ion-input type="text" [(ngModel)]="user.firstname" name="firstname" placeholder="{{user.firstname}}" clearInput required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked><ion-icon name="md-person"></ion-icon>&nbsp;Lastname</ion-label>
+          <ion-input type="text" [(ngModel)]="user.lastname" name="lastname" placeholder="{{user.lastname}}" clearInput required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked><ion-icon name="md-at"></ion-icon>&nbsp;Email</ion-label>
+          <ion-input type="text" [(ngModel)]="user.email" name="email" placeholder="{{user.email}}" clearInput required></ion-input>
+        </ion-item>
+
+        <button ion-button type="submit" block (click)="updateUser()">Wijzig Profiel</button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Wachtwoord wijzigen</ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="logForm()">
+        <!--<ion-item>
+          <ion-label color="primary" stacked>Current Password</ion-label>
+          <ion-input type="password" [(ngModel)]="currentPass" placeholder="CurrentPassword" required clearInput></ion-input>
+        </ion-item>-->
+
+      <ion-item>
+        <ion-label color="primary" stacked><ion-icon name="ios-key"></ion-icon>&nbsp;Password</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" placeholder="Password" clearInput></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked><ion-icon name="ios-key"></ion-icon>&nbsp;Confirm Password</ion-label>
+        <ion-input type="password" name="pwCheck" [(ngModel)]="passwordCheck" placeholder="Confirm Password" clearInput></ion-input>
+      </ion-item>
+
+      <button ion-button type="submit" block (click)="updateUser()" [disabled]="password !== null && user.password !== passwordCheck">Wijzig Wachtwoord</button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <!--<form (ngSubmit)="logForm()">
     <ion-item>
       <ion-label color="primary" stacked>Username</ion-label>
       <ion-input type="text" [(ngModel)]="account.username" name="username" placeholder="{{user.username}}" clearInput></ion-input>
@@ -47,5 +97,15 @@
     </ion-item>
 
     <button ion-button type="submit" block (click)="updateUser()" [disabled]="password !== null && account.password !== passwordCheck">Submit</button>
-  </form>
+  </form>-->
 </ion-content>
+
+<ion-footer color="dark">
+  <ion-navbar color="dark">
+    <ion-buttons>
+      <div text-center>
+
+      </div>
+    </ion-buttons>
+  </ion-navbar>
+</ion-footer>

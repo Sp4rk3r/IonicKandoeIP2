@@ -28,7 +28,7 @@ export interface PageInterface {
 })
 export class MenuPage {
   rootPage = 'HomePage';
-  public user : User={id:0,email:'',lastname: '',firstname:'',username:'',password:'',organiser:''};
+  public user : User={id:0,email:'',lastname: '',firstname:'',username:'',password:''};
   public username: string;
   //tabs:string;
   //Reference tot the app's root nav

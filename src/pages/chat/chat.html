@@ -13,22 +13,18 @@
     </ion-buttons>
     <ion-title align-title="center">Welkom {{user.username}}!</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
+
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="home">
+<ion-content #content class="home">
   <!--<div class="chat-container">-->
     <div class="chat">
       <div class="message" *ngFor="let currentmessage of message">
-
         <!--{{currentmessage.message}}-->
         <div class="messageContains" *ngIf="currentmessage.message.includes(username)">{{currentmessage.message}}</div>
         <div class="notUserContains" *ngIf="!currentmessage.message.includes(username)">{{currentmessage.message}}</div>
         </div>
-
     </div>
   <!--</div>-->
 </ion-content>

@@ -25,7 +25,7 @@ import {Phase2Page} from "../phase2/phase2";
 export class HomePage implements OnInit{
   username: string;
   email: string;
-  public user : User={id:0,email:'',lastname: '',firstname:'',username:'',password:'',organiser:''};
+  public user : User={id:0,email:'',lastname: '',firstname:'',username:'',password:''};
   //public session = [];
   public oldSessions = [];
   public plannedSessions = [];

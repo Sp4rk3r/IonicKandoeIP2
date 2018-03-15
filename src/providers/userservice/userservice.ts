@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import {TOKEN_NAME} from '../auth-constant/auth-constant';
 import {JwtHelper} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
+import {User} from "../../model/user";
 
 /*
   Generated class for the UserserviceProvider provider.
@@ -38,6 +39,11 @@ export class UserserviceProvider {
 */
   getUser(userId: number): Observable<any> {
     return this.http.get('https://kandoe-backend.herokuapp.com/users/' + userId);
+  }
+
+  updateUser(user: User, userId: number): Observable<any> {
+    const body = JSON.stringify(user);
+    return this.http.put('https://kandoe-backend.herokuapp.com/users/' + userId, body, httpOptions)
   }
 
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavParams} from 'ionic-angular';
 import * as $ from 'jquery';
 import * as SockJS from 'sockjs-client';
@@ -19,6 +19,9 @@ import {MessageServiceProvider} from "../../providers/message-service/message-se
   selector: 'page-chat',
   templateUrl: 'chat.html',
   providers: [UseridStorage, UserserviceProvider],
+  queries: {
+    content: new ViewChild('content')
+  }
 })
 export class ChatPage {
   private serverUrl = 'https://kandoe-backend.herokuapp.com/socket';
@@ -29,6 +32,9 @@ export class ChatPage {
   public sessionId;
   private stringBody: string;
   private stringDiv: string;
+  private timestamp: string;
+  private timesubstring: string;
+
 //  public stringBody;
 
   constructor(private userservice: UserserviceProvider,
@@ -68,6 +74,8 @@ export class ChatPage {
     let ws = new SockJS(this.serverUrl);
     this.stringBody= "";
     this.stringDiv = "";
+    this.timestamp = "";
+    this.timesubstring = "";
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
@@ -76,16 +84,23 @@ export class ChatPage {
         //alert(message.contains(username));
         if (message.body) {
           this.stringBody = message.body;
+          this.timestamp = this.stringBody.substring(0,10);
+          //alert(this.timestamp);
           //alert(this.stringBody);
           if (this.stringBody.includes(username)){
             //alert("bevat: " + username);
-            this.stringDiv = "<div class='\messageContains\'>"+message.body+"</div>";
+            //this.stringBody.substring(10);
+            //alert(this.stringBody);
+            this.stringDiv = "<div class='\messageContains\'>"+this.stringBody+"</div>";
+            //this.timesubstring = "<div class='\timeStamp\'>"+this.timestamp+"</div>";
           }
           else if (!this.stringBody.includes(username)) {
-            this.stringDiv = "<div class='\notUserContains\'>"+message.body+330+"</div>"
+            this.stringDiv = "<div class='\notUserContains\'>"+message.body+"</div>"
           }
           //alert(this.stringDiv);
-          $(".chat").append(this.stringDiv);
+          $(".chat").append(this.stringDiv/*,this.timesubstring*/);
+          //$(".chat").append(this.timesubstring);
+
           console.log(message.body);
           //alert(username)
         }/*else {

@@ -7,10 +7,11 @@
 <ion-content class="login-content" padding>
   <ion-row class="logo-row">
     <ion-col></ion-col>
-    <ion-col width-67>
-      <img src="assets/imgs/hongbot.png"/>
+    <ion-col col-8>
+      <img src="assets/imgs/KandoeCircleLogin.png"/>
     </ion-col>
     <ion-col></ion-col>
+
   </ion-row>
   <div class="login-box">
     <form (ngSubmit)="login3()" #registerForm="ngForm">
@@ -19,11 +20,13 @@
           <ion-list inset>
 
             <ion-item>
-              <ion-input type="text" placeholder="Username" name="email" [(ngModel)]="usernametext" required autofocus></ion-input>
+              <ion-label><ion-icon name="md-contact"></ion-icon></ion-label>
+              <ion-input type="text" placeholder="Username" name="email" [(ngModel)]="usernametext" required autofocus><ion-icon name="md-contact"></ion-icon></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="passwordtext" required></ion-input>
+              <ion-label><ion-icon name="ios-key"></ion-icon></ion-label>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="passwordtext" required><ion-icon name="md-contact"></ion-icon></ion-input>
             </ion-item>
 
           </ion-list>
