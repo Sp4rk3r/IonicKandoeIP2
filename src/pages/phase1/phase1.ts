@@ -6,7 +6,7 @@ import {UseridStorage} from "../../sessionStorage/userid-storage";
 import {CardserviceProvider} from "../../providers/cardservice/cardservice";
 import {MenuPage} from "../menu/menu";
 import {ChatPage} from "../chat/chat";
-import {CreateCardPage} from "../create-card/create-card";
+//import {CreateCardPage} from "../create-card/create-card";
 
 /**
  * Generated class for the Phase1Page page.
@@ -118,8 +118,8 @@ export class Phase1Page {
     });
   }
 
-  createCard() {
+  /*createCard() {
       let popover = this.popoverCtrl.create(CreateCardPage);
       popover.present();
-  }
+  }*/
 }

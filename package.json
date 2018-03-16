@@ -34,14 +34,14 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "date-fns": "latest",
     "ionic-angular": "3.9.2",
+    "ionic2-sockjs-client": "latest",
     "ionicons": "3.0.0",
     "jquery": "latest",
     "rxjs": "5.5.2",
     "sockjs-client": "latest",
     "stompjs": "^2.3.3",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18",
-    "ionic2-sockjs-client": "latest"
+    "zone.js": "0.8.18"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
