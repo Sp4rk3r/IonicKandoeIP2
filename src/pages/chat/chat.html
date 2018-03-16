@@ -18,15 +18,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content #content class="home">
-  <!--<div class="chat-container">-->
-    <div class="chat">
+
+    <div class="chat2">
       <div class="message" *ngFor="let currentmessage of message">
         <!--{{currentmessage.message}}-->
         <div class="messageContains" *ngIf="currentmessage.message.includes(username)">{{currentmessage.message}}</div>
-        <div class="notUserContains" *ngIf="!currentmessage.message.includes(username)">{{currentmessage.message}}</div>
-        </div>
+        <div class="notUserContains" style="position: relative; float: left; background: white; width: 60%; margin: 2vw; text-align: left; border-radius: 10px; padding: 5px" *ngIf="!currentmessage.message.includes(username)">{{currentmessage.message}}</div>
+      </div>
     </div>
-  <!--</div>-->
+
+
+
+
 </ion-content>
 <!--<div width="100%">
 <div style="text-align:center">

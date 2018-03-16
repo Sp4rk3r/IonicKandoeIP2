@@ -82,23 +82,28 @@ export class ChatPage {
       //alert(sessionId);
       that.stompClient.subscribe("/chat/" + sessionId , (message) => {
         //alert(message.contains(username));
-        if (message.body) {
+        //if (message.body) {
           this.stringBody = message.body;
-          this.timestamp = this.stringBody.substring(0,10);
+          //this.timestamp = this.stringBody.substring(0,10);
           //alert(this.timestamp);
           //alert(this.stringBody);
           if (this.stringBody.includes(username)){
             //alert("bevat: " + username);
             //this.stringBody.substring(10);
             //alert(this.stringBody);
-            this.stringDiv = "<div class='\messageContains\'>"+this.stringBody+"</div>";
+            alert("username");
+            //this.stringDiv = "<div class='\messageContains\'>"+this.stringBody+"</div>";
+            $(".chat2").append("<div class='\messageContains\'>"+this.stringBody+"</div>");
             //this.timesubstring = "<div class='\timeStamp\'>"+this.timestamp+"</div>";
-          }
-          else if (!this.stringBody.includes(username)) {
-            this.stringDiv = "<div class='\notUserContains\'>"+message.body+"</div>"
+          }else {
+            alert("Not username");
+            //this.stringDiv = "<div class='\notUserContains\'>"+this.stringBody+"</div>";
+            $(".chat2").append("<div class='\notUserContains\' style='\position: relative; float: left; background: white; width: 60%; margin: 2vw; text-align: left; border-radius: 10px; padding: 5px\'>"+this.stringBody+"</div>");
+            //ngOnInit();
+
           }
           //alert(this.stringDiv);
-          $(".chat").append(this.stringDiv/*,this.timesubstring*/);
+         // $(".chat").append(this.stringDiv);
           //$(".chat").append(this.timesubstring);
 
           console.log(message.body);
@@ -106,7 +111,8 @@ export class ChatPage {
         }/*else {
           $(".chat").append("<div class='\notUserContains\'>"+message.body+330+"</div>");
         }*/
-      })
+      //}
+      )
     })
   }
 
