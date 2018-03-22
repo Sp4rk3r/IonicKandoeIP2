@@ -7,6 +7,9 @@ import {CardserviceProvider} from "../../providers/cardservice/cardservice";
 import {MenuPage} from "../menu/menu";
 import {ChatPage} from "../chat/chat";
 import {CreateCardPage} from "../create-card/create-card";
+import {Card} from "../../model/card";
+import {LoginPage} from "../login/login";
+import {AuthServiceProvider} from "../../providers/auth-service/auth-service";
 
 /**
  * Generated class for the Phase1Page page.
@@ -24,10 +27,14 @@ export class Phase1Page {
 
   public userId;
   public sessionId;
-  public session = new Session(0, '', 0, 0, 0, 0, 0, [''], [0], 0, [0], 0, false);
+  public session = new Session(0, '', 0, 0, 0, 0, 0, [''], [''], [], [], 0, [], null, false, new Date(), false, 0,  0);
   public cards = [];
   public selectedCards = [];
   public buttonStates = [];
+  public cardName;
+  public cardDesc;
+  public set = 0;
+  public card;
 
   public barValue: 40;
   public turn = true;
@@ -37,9 +44,20 @@ export class Phase1Page {
               private sessionService: SessionsProvider,
               private userIdStorage: UseridStorage,
               private cardService: CardserviceProvider,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,
+              private auth: AuthServiceProvider) {
     this.userId = this.userIdStorage.getUserId();
     this.sessionId = this.navParams.get("sessionId");
+
+      this.cardName = this.navParams.get("cardName");
+      console.log(this.navParams.get("cardNameNew"));
+       this.cardDesc = this.navParams.get("cardDesc");
+       this.card = new Card(0,this.session.categoryId,this.cardName, this.cardDesc,'');
+       this.cards.push(this.card);
+       console.log('card: ' + this.card);
+       console.log('cardnaam: ' + this.card.name);
+
+
     this.sessionService.getSession(this.sessionId,this.userId).subscribe(
       data => {
         this.session = data;
@@ -85,6 +103,17 @@ export class Phase1Page {
     this.buttonStates[index] = false;
   }
 
+  saveCards() {
+    console.log(this.selectedCards);
+    this.sessionService.saveSessionCards(this.selectedCards, this.session.id, this.userId).subscribe(
+      data => {
+        console.log('selectedcard ' + this.selectedCards.toString());
+        console.log('sessioncards ' + data.sessionCardDtos[0]);
+        this.navCtrl.setRoot('MenuPage');
+      }
+    )
+  }
+
   saveCardsIds() {
     this.sessionService.saveSessionCards(this.selectedCards, this.session.id, this.userId).subscribe(
       data => {
@@ -118,8 +147,17 @@ export class Phase1Page {
     });
   }
 
-  createCard() {
-      let popover = this.popoverCtrl.create(CreateCardPage);
-      popover.present();
+  createCard(sessionId: number) {
+      /*let popover = this.popoverCtrl.create(CreateCardPage);
+      popover.present();*/
+      this.navCtrl.push(CreateCardPage, {
+        sessionIdParam: sessionId,
+      });
+  }
+
+  public logout() {
+    this.auth.logout().subscribe(succ => {
+      this.navCtrl.setRoot(LoginPage)
+    });
   }
 }

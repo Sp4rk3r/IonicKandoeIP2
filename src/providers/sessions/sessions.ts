@@ -4,6 +4,7 @@ import {Session} from "../../model/session";
 import {SessionState} from "../../model/SessionState";
 import {JwtHelper} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
+import {SessionCard} from "../../model/sessionCard";
 
 /*
   Generated class for the SessionsProvider provider.
@@ -65,6 +66,11 @@ export class SessionsProvider {
   saveSessionCards(cardIds: number[], sessionId: number ,userId: number): Observable<any> {
     const body = JSON.stringify(cardIds);
     return this.http.post('https://kandoe-backend.herokuapp.com/users/' + userId + '/sessions/' + sessionId + '/saveCards', body, httpOptions);
+  }
+
+  saveSelectedCard(selectedCard: SessionCard, sessionId: number, userId: number): Observable<any> {
+    const body = JSON.stringify(selectedCard);
+    return this.http.put('http://kandoe-backend.herokuapp.com/users/' + userId + '/sessions/' + sessionId + '/sessionCards/' + selectedCard.id, body, httpOptions);
   }
 }
 

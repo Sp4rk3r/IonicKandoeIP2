@@ -19,10 +19,20 @@
   <!--<h3>Welcome inside, {{username}}!</h3>
   Your Email is: {{email}}-->
   <div *ngFor="let session of currentSessions" class="sessionBox">
-    <ion-card>
-      <img src="assets/imgs/vakantie.jpg">
+    <ion-card *ngIf="session.state === 1">
+      <img class="backImage" src="assets/imgs/vakantie.jpg">
       <div class="card-title">{{session.name}}</div>
       <button ion-button (click)="EnterSessie(session)" full>Hervat</button>
+    </ion-card>
+    <ion-card *ngIf="session.state === 2">
+      <img class="backImage" src="assets/imgs/vakantie.jpg">
+      <div class="card-title">{{session.name}}</div>
+      <button ion-button (click)="EnterSessie(session)" full>Hervat</button>
+    </ion-card>
+    <ion-card *ngIf="session.state === 3">
+      <img class="backImage" src="assets/imgs/vakantie.jpg">
+      <div class="card-title">{{session.name}}</div>
+      <button ion-button color="secondary" (click)="EnterSessie(session)" full>Hervat</button>
     </ion-card>
   </div>
   <div *ngIf="currentSessions.length == 0">
@@ -33,9 +43,9 @@
   <ion-title>Geplande Sessie's</ion-title>
   <div *ngFor="let session of plannedSessions" class="sessionBox">
     <ion-card>
-      <img src="assets/imgs/bezienswaardigheden.jpg">
+      <img class="backImage" src="assets/imgs/bezienswaardigheden.jpg">
       <div class="card-title">{{session.name}}</div>
-      <div class="card-subtitle">tijd van start</div>
+      <div class="card-subtitle">{{session.startDate | date: 'dd/MM/yyyy/hh:mm'}}</div>
     </ion-card>
   </div>
   <div *ngIf="plannedSessions.length == 0">

@@ -44,7 +44,7 @@ export class SessionDonePage {
       }
     );
     for (const session of this.oldSessions) {
-      if (session.state === 3) {
+      if (session.state === 4) {
         this.pastSessions.push(session);
       }
     }

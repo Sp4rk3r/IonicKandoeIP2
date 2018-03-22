@@ -20,24 +20,47 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="home" padding>
-  <ion-title>Selecteer kaarten</ion-title>
+<ion-content padding class="home">
+  <ion-title *ngIf="selectedCard.name !== ''">Geselecteerde kaart: {{selectedCard.name}}</ion-title>
   <div *ngFor="let card of cards; let i = index">
     <ion-card>
-      <img src="assets/imgs/Kandoe.jpg">
+      <progress id="different" max="{{session.totalRounds}}" value="1" class="node-js">
+        <!-- Browsers that support HTML5 progress element will ignore the html inside `progress` element. Whereas older browsers will ignore the `progress` element and instead render the html inside it. -->
+        <!--<div class="progress-bar">
+          <span style="width: '{{barValue}}'%">35%</span>
+        </div>-->
+      </progress>
       <ion-card-content>
         <ion-title>{{card.name}}</ion-title>
         <div class="descriptionContainer">{{card.description}}</div>
-
       </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button [disabled]="!isMyTurn" ion-button icon-left clear small (click)="selectCard(card,i)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>{{barValue}} likes</div>
+          </button>
+        </ion-col>
+      </ion-row>
     </ion-card>
+
   </div>
-  <br>
-  <button ion-button full color="primary" (click)="saveCardsIds()">Klaar</button>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="openMondal(session.id)"><ion-icon name="ios-chatbubbles"></ion-icon></button>
+    <!--Moet nog aangepast worden aan de sessie.-->
+  </ion-fab>
 </ion-content>
+
 
 <ion-footer color="dark">
   <ion-navbar color="dark">
-    <ion-title>Het is uw beurt in 15 min</ion-title>
+    <!--<ion-buttons>-->
+      <!--<div text-center class="endTurn">-->
+        <button ion-button outline full color="light" [disabled]="!isMyTurn" (click)="confirmMoveCard()">Beëindig beurt</button>
+      <!--</div>-->
+    <!--</ion-buttons>-->
   </ion-navbar>
 </ion-footer>
+
+

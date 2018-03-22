@@ -10,4 +10,6 @@ import { Phase2Page } from './phase2';
     IonicPageModule.forChild(Phase2Page),
   ],
 })
-export class Phase2PageModule {}
+export class Phase2PageModule {
+
+}

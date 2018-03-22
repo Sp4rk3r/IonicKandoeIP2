@@ -1,4 +1,5 @@
 import {SessionState} from "./SessionState";
+import {SessionCard} from "./sessionCard";
 
 export class Session {
   constructor(public id: number,
@@ -9,10 +10,17 @@ export class Session {
               public categoryId: number,
               public timeForMove: number,
               public participants: string[],
+              public organisers: string[],
               public participantIds: number[],
+              public organisersIds: number[],
               public type: number,
-              public sessionCardIds: number[],
+              public sessionCardDtos: SessionCard[],
               public state: number,
-              public userSubmitted: boolean) {
+              public userSubmitted: boolean,
+              public startDate: Date,
+              public allowCardCreation: boolean,
+              public currentUserId: number,
+              //public snapshotDtos: Snapshot[],
+              public amountSubmitted: number) {
   }
 }

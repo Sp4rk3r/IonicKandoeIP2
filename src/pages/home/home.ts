@@ -74,9 +74,9 @@ export class HomePage implements OnInit{
     for (const session of this.oldSessions) {
       if (session.state === 0) {
         this.plannedSessions.push(session);
-      }else if (session.state === 1 || session.state === 2) {
+      }else if (session.state === 1 || session.state === 2 || session.state === 3) {
         this.currentSessions.push(session);
-      }else if (session.state === 3) {
+      }else if (session.state === 4) {
         this.pastSessions.push(session);
       }
     }
@@ -110,7 +110,7 @@ export class HomePage implements OnInit{
       this.nav.setRoot(Phase1Page, {
         sessionId: session.id
       })
-    } else {
+    } else if(session.state === 3) {
       this.nav.setRoot(Phase2Page, {
         sessionId: session.id
       })
